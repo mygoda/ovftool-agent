@@ -77,6 +77,7 @@ def convert(host, username, password, datacenter, vm_name, task_id):
                 return False, res
 
     except Exception as e:
+        print(str(e))
         logger.error("convert ova when catch error:%s" % result)
         return False, result[0]
 
