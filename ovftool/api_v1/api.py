@@ -27,6 +27,7 @@ def ovas():
         data = request.form
         token = data.get("token", "")
         print(token)
+        print(config.get("TOKEN"))
         if token == config.get("TOKEN"):
             # just confirm can i do it
 
