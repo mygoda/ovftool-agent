@@ -66,7 +66,7 @@ def convert(host, username, password, datacenter, vm_name, task_id):
                                    ,stdin=PIPE, stdout=PIPE, stderr=PIPE)
         print("hahah is%s" % process)
         result = process.communicate()
-
+        print(result)
         for res in result:
             if "SUCCESS" in res:
                 chmod_process = subprocess.Popen("chmod 644 %s" % ova_path, shell=True)
