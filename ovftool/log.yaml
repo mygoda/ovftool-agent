@@ -12,28 +12,28 @@ handlers:
     class: logging.handlers.TimedRotatingFileHandler
     level: DEBUG
     formatter: hiformat
-    filename: /Users/tao-xu/ovftool/debug.log
+    filename: /var/log/ovftool/debug.log
     when: midnight
     backupCount: 30
   info_file:
     class: logging.handlers.TimedRotatingFileHandler
     level: INFO
     formatter: hiformat
-    filename: /Users/tao-xu/ovftool/info.log
+    filename: /var/log/ovftool/info.log
     when: midnight
     backupCount: 30
   error_file:
     class: logging.handlers.TimedRotatingFileHandler
     level: ERROR
     formatter: hiformat
-    filename: /Users/tao-xu/ovftool/error.log
+    filename: /var/log/ovftool/error.log
     when: midnight
     backupCount: 30
   method_time_file:
     class: logging.handlers.TimedRotatingFileHandler
     level: DEBUG
     formatter: hiformat
-    filename: /Users/tao-xu/ovftool/method_time.log
+    filename: /var/log/ovftool/method_time.log
     when: midnight
     backupCount: 30
 loggers:
