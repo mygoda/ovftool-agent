@@ -17,7 +17,7 @@ class Config(object):
 
     OVF_TOKEN = "OVF_TEST"
 
-    DOWNLOAD_PATH = "/var/tmp/downloads"
+    # DOWNLOAD_PATH = "/var/tmp/downloads"
 
     CALLBACK_TOKEN = "CALLBACK_TEST"
 
