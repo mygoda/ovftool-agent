@@ -9,7 +9,6 @@ from subprocess import PIPE
 from ovftool.settings import Config as config
 import logging
 
-print(config)
 
 logger = logging.getLogger(__name__)
 

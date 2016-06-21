@@ -28,6 +28,8 @@ def convert_to_ova(host, username, password, datacenter, vm_name, task_id):
     """
     logging.debug("start convert vm to ova")
     try:
+        print(convert)
+        print(vm_name)
         success, result = convert(host=host, username=username, password=password, datacenter=datacenter, vm_name=vm_name, task_id=task_id)
         if success:
             # 回调
