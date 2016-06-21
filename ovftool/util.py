@@ -57,6 +57,7 @@ def convert(host, username, password, datacenter, vm_name, task_id):
     :return:
     """
     try:
+        print("yesyeysysysys")
         ova_path = "%s/%s.ova" % (config.OVA_PATH, vm_name)
         logger.info("start convert....")
         process = subprocess.Popen("ovftool -o --machineOutput --X:logLevel=verbose --X:logFile='%s'"
