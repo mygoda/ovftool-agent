@@ -36,6 +36,7 @@ def convert_to_ova(host, username, password, datacenter, vm_name, task_id):
             status = "ovf_success"
         else:
             status = "ovf_fault"
+        print("this status is isisisisisi%s" % status)
         task_callback(task_id=task_id, status=status, result=result)
 
     except Exception as e:
