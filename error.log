@@ -1,0 +1,9 @@
+[2016-06-19 12:18:59 +0800] [10577] [INFO] Starting gunicorn 19.6.0
+[2016-06-19 12:18:59 +0800] [10577] [INFO] Listening at: http://127.0.0.1:5000 (10577)
+[2016-06-19 12:18:59 +0800] [10577] [INFO] Using worker: sync
+[2016-06-19 12:18:59 +0800] [10580] [INFO] Booting worker with pid: 10580
+[2016-06-19 12:18:59 +0800] [10581] [INFO] Booting worker with pid: 10581
+[2016-06-19 12:18:59 +0800] [10582] [INFO] Booting worker with pid: 10582
+[2016-06-19 12:18:59 +0800] [10583] [INFO] Booting worker with pid: 10583
+[2016-06-19 12:19:02 +0800] [10577] [INFO] Handling signal: int
+[2016-06-19 12:19:02 +0800] [10577] [INFO] Shutting down: Master
