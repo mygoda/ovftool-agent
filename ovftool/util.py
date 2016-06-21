@@ -57,14 +57,14 @@ def convert(host, username, password, datacenter, vm_name, task_id):
     """
     try:
         print("yesyeysysysys")
-        ova_path = "%s/%s.ova" % (config.OVA_PATH, vm_name)
+        ova_path = "%s/%s.ova" % (config.get("OVA_PATH"), vm_name)
         logger.info("start convert....")
         process = subprocess.Popen("ovftool -o --machineOutput --X:logLevel=verbose --X:logFile='%s'"
                                    "  --noSSLVerify "
                                    " 'vi://%s:%s@%s/%s/vm/%s'"
-                                   " '%s'" % (config.OVFTOOL_LOG, username, password, host, datacenter, vm_name, ova_path), shell=True
+                                   " '%s'" % (config.get("OVFTOOL_LOG"), username, password, host, datacenter, vm_name, ova_path), shell=True
                                    ,stdin=PIPE, stdout=PIPE, stderr=PIPE)
-
+        print("hahah is%s" % process)
         result = process.communicate()
 
         for res in result:
