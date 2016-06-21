@@ -32,14 +32,13 @@ def deploy(host, username, password, vm_name, cluster_name, datastore, datacente
                                    " %s 'vi://%s:%s@%s/%s/host/%s'" % (config.OVFTOOL_LOG, tpl_folder, datastore, ova_path, username, password, host, datacenter, cluster_name), shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
 
         result = process.communicate()
-
+        print(result)
         for res in result:
             if "SUCCESS" in res:
                 logger.debug("ova:%s convert success then to chmod" % vm_name)
                 return True, result
             elif "ERROR" in res:
                 return False, res
-
     except Exception as e:
         logger.error("deploy ovftool when catch error:%s" % result)
         return False, result[0]

@@ -67,6 +67,7 @@ def deploy_ova(username, password, host, vm_name, cluster_name, datastore, datac
             status = "deploy_success"
         else:
             status = "deploy_fault"
+        print(status)
         task_callback(task_id=task_id, status=status, result=result)
 
     except Exception as e:
