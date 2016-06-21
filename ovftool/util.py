@@ -46,8 +46,8 @@ def deploy(host, username, password, vm_name, cluster_name, datastore, datacente
             elif "ERROR" in res:
                 return False, res
     except Exception as e:
-        logger.error("deploy ovftool when catch error:%s" % result)
-        return False, result[0]
+        logger.error("deploy ovftool when catch error:%s" % str(e))
+        return False, str(e)
 
 
 def convert(host, username, password, datacenter, vm_name, task_id):
