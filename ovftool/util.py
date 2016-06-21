@@ -33,7 +33,7 @@ def deploy(host, username, password, vm_name, cluster_name, datastore, datacente
 
         process = subprocess.Popen("ovftool --machineOutput --X:logLevel=verbose --X:logFile='%s'"
                                    " --acceptAllEulas  --noSSLVerify  -ds='%s'"
-                                   " %s 'vi://%s:%s@%s/%s/host/%s'" % (config.OVFTOOL_LOG, datastore,
+                                   " %s 'vi://%s:%s@%s/%s/host/%s'" % (config.get("OVFTOOL_LOG"), datastore,
                                                                        ova_path, username, password, host, datacenter, cluster_name),
                                    shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
 
