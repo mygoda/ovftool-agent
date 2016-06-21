@@ -6,7 +6,7 @@
 import subprocess
 import requests
 from subprocess import PIPE
-from ovftool.settings import Config as config
+from ovftool import config
 import logging
 
 
@@ -78,8 +78,8 @@ def convert(host, username, password, datacenter, vm_name, task_id):
 
     except Exception as e:
         print(str(e))
-        logger.error("convert ova when catch error:%s" % result)
-        return False, result[0]
+        logger.error("convert ova when catch error:%s" % str(e))
+        return False, str(e)
 
 
 def task_callback(task_id, status, result):
