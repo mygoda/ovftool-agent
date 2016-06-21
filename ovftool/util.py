@@ -11,7 +11,7 @@ import logging
 
 print(config)
 
-logger = logging.debug(__name__)
+logger = logging.getLogger(__name__)
 
 
 def deploy(host, username, password, vm_name, cluster_name, datastore, datacenter, tpl_folder, task_id):
