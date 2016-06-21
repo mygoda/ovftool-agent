@@ -26,12 +26,15 @@ def ovas():
     if request.method == "POST":
         data = request.form
         token = data.get("token", "")
+        print(token)
         if token == config.get("TOKEN"):
             # just confirm can i do it
+
             convert_to_ova.apply_async(args=[data.get("host"), data.get("username"), data.get("password"),
                                              data.get("datacenter"), data.get("vm_name"), data.get("task_id")])
             return jsonify(result)
         else:
+            print("*" * 30)
             result["status"] = "forbid"
             result["msg"] = "can not do it"
             return jsonify(result)
