@@ -7,7 +7,7 @@ class Config(object):
         just for config class
     """
 
-    OVA_PATH = "/root/ovftool/"
+    OVA_PATH = "/data/transmission-daemon/downloads"
 
     OVFTOOL_LOG = "/root/ovftool.log"
 
@@ -16,8 +16,6 @@ class Config(object):
     PAAS_HOST = ""  # IP:PORT
 
     OVF_TOKEN = "OVF_TEST"
-
-    # DOWNLOAD_PATH = "/var/tmp/downloads"
 
     CALLBACK_TOKEN = "CALLBACK_TEST"
 
@@ -31,9 +29,7 @@ class Config(object):
 
     MAIL_PASSWORD = 'yun-idc.com'
 
-    DOWNLOAD_PATH = "/root/ovftool/"
-
-
+    DOWNLOAD_PATH = "/data/transmission-daemon/downloads "
 
 
 

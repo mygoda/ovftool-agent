@@ -1,4 +1,5 @@
 mkdir /var/log/ovftool
+mkdir /var/tmp/torrents
 
 touch /var/log/ovftool/info.log
 touch /var/log/ovftool/debug.log

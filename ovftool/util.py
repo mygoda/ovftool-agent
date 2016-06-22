@@ -38,7 +38,6 @@ def deploy(host, username, password, vm_name, cluster_name, datastore, datacente
                                    shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
 
         result = process.communicate()
-        print(result)
         for res in result:
             if "SUCCESS" in res:
                 logger.debug("ova:%s convert success then to chmod" % vm_name)
@@ -61,7 +60,6 @@ def convert(host, username, password, datacenter, vm_name, task_id):
     :return:
     """
     try:
-        print("yesyeysysysys")
         ova_path = "%s/%s.ova" % (config.get("OVA_PATH"), vm_name)
         logger.info("start convert....")
         process = subprocess.Popen("ovftool -o --machineOutput --X:logLevel=verbose --X:logFile='%s'"
@@ -69,9 +67,7 @@ def convert(host, username, password, datacenter, vm_name, task_id):
                                    " 'vi://%s:%s@%s/%s/vm/%s'"
                                    " '%s'" % (config.get("OVFTOOL_LOG"), username, password, host, datacenter, vm_name, ova_path), shell=True
                                    ,stdin=PIPE, stdout=PIPE, stderr=PIPE)
-        print("hahah is%s" % process)
         result = process.communicate()
-        print(result)
         for res in result:
             if "SUCCESS" in res:
                 chmod_process = subprocess.Popen("chmod 644 %s" % ova_path, shell=True)
@@ -82,7 +78,6 @@ def convert(host, username, password, datacenter, vm_name, task_id):
                 return False, res
 
     except Exception as e:
-        print(str(e))
         logger.error("convert ova when catch error:%s" % str(e))
         return False, str(e)
 
