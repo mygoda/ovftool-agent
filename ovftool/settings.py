@@ -13,7 +13,7 @@ class Config(object):
 
     TOEKN = "OVF_TEST"
 
-    PAAS_HOST = ""  # IP:PORT
+    PAAS_HOST = "114.112.92.254:8888"  # IP:PORT
 
     OVF_TOKEN = "OVF_TEST"
 

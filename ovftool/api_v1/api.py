@@ -35,7 +35,6 @@ def ovas():
                                              data.get("datacenter"), data.get("vm_name"), data.get("task_id")])
             return jsonify(result)
         else:
-            print("*" * 30)
             result["status"] = "forbid"
             result["msg"] = "can not do it"
             return jsonify(result)

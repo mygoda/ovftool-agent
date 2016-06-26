@@ -27,15 +27,16 @@ def deploy(host, username, password, vm_name, cluster_name, datastore, datacente
     try:
         logger.info("start deploy ....")
         ova_path = "%s/%s.ova" % (config.get("DOWNLOAD_PATH"), vm_name)
-        # process = subprocess.Popen("ovftool --machineOutput --X:logLevel=verbose --X:logFile='%s'"
-        #                            " --acceptAllEulas  --noSSLVerify -vf='%s' -ds='%s'"
-        #                            " %s 'vi://%s:%s@%s/%s/host/%s'" % (config.OVFTOOL_LOG, tpl_folder, datastore, ova_path, username, password, host, datacenter, cluster_name), shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
-
-        process = subprocess.Popen("ovftool --machineOutput --X:logLevel=verbose --X:logFile='%s'"
-                                   " --acceptAllEulas  --noSSLVerify  -ds='%s'"
-                                   " %s 'vi://%s:%s@%s/%s/host/%s'" % (config.get("OVFTOOL_LOG"), datastore,
-                                                                       ova_path, username, password, host, datacenter, cluster_name),
-                                   shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        if tpl_folder:
+            process = subprocess.Popen("ovftool --machineOutput --X:logLevel=verbose --X:logFile='%s'"
+                                       " --acceptAllEulas  --noSSLVerify -vf='%s' -ds='%s'"
+                                       " %s 'vi://%s:%s@%s/%s/host/%s'" % (config.OVFTOOL_LOG, tpl_folder, datastore, ova_path, username, password, host, datacenter, cluster_name), shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        else:
+            process = subprocess.Popen("ovftool --machineOutput --X:logLevel=verbose --X:logFile='%s'"
+                                       " --acceptAllEulas  --noSSLVerify  -ds='%s'"
+                                       " %s 'vi://%s:%s@%s/%s/host/%s'" % (config.get("OVFTOOL_LOG"), datastore,
+                                                                           ova_path, username, password, host, datacenter, cluster_name),
+                                       shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
 
         result = process.communicate()
         for res in result:
