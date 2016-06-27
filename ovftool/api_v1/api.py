@@ -29,6 +29,7 @@ def ovas():
         token = data.get("token", "")
         logging.debug("this data is %s" % data)
         logging.debug("token is %s" % token)
+        logging.debug("config token is %s" % config.get("TOKEN"))
         if token == config.get("TOKEN"):
             # just confirm can i do it
             logging.debug("this action can do it")
