@@ -90,7 +90,7 @@ def task_callback(task_id, status, result):
     :return:
     """
 
-    url = "http://%s/stat/task/callback/" % config.PAAS_HOST
+    url = "http://%s/stat/task/callback/" % config["PAAS_HOST"]
 
     data = {
         "task_id": task_id,
