@@ -5,6 +5,7 @@ from ovftool.celery_task import convert_to_ova, deploy_ova, add_together
 
 from ovftool.api_v1 import api_bp
 from ovftool import config
+import logging
 
 
 @api_bp.route("/status/", methods=["GET"])
@@ -26,11 +27,10 @@ def ovas():
     if request.method == "POST":
         data = request.form
         token = data.get("token", "")
-        print(token)
-        print(config.get("TOKEN"))
+        logging.debug("this data is %s" % data)
+        logging.debug("token is %s" % token)
         if token == config.get("TOKEN"):
             # just confirm can i do it
-
             convert_to_ova.apply_async(args=[data.get("host"), data.get("username"), data.get("password"),
                                              data.get("datacenter"), data.get("vm_name"), data.get("task_id")])
             return jsonify(result)
