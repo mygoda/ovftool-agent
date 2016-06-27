@@ -69,6 +69,7 @@ def convert(host, username, password, datacenter, vm_name, task_id):
                                    " '%s'" % (config.get("OVFTOOL_LOG"), username, password, host, datacenter, vm_name, ova_path), shell=True
                                    ,stdin=PIPE, stdout=PIPE, stderr=PIPE)
         result = process.communicate()
+        print(result)
         for res in result:
             if "SUCCESS" in res:
                 chmod_process = subprocess.Popen("chmod 644 %s" % ova_path, shell=True)
