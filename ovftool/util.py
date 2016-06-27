@@ -96,7 +96,7 @@ def task_callback(task_id, status, result):
         "task_id": task_id,
         "status": status,
         "result": result,
-        "token": config.CALLBACK_TOKEN
+        "token": config["CALLBACK_TOKEN"]
     }
 
     respone = requests.post(url, data=data)
