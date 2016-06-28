@@ -29,7 +29,7 @@ class Config(object):
 
     MAIL_PASSWORD = 'yun-idc.com'
 
-    DOWNLOAD_PATH = "/data/transmission-daemon/downloads "
+    DOWNLOAD_PATH = "/data/transmission-daemon/downloads"
 
 
 
