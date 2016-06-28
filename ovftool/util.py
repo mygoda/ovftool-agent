@@ -36,6 +36,8 @@ def deploy(host, username, password, vm_name, cluster_name, datastore, datacente
                                                                                                                                                             ova_path, username, password, host, datacenter, cluster_name)
 
             print(aa)
+            print(config.get("DOWNLOAD_PATH"))
+            print("11%s" % vm_name)
             process = subprocess.Popen("ovftool --machineOutput --X:logLevel=verbose --X:logFile='%s'"
                                        " --acceptAllEulas  --noSSLVerify  -ds='%s'"
                                        " %s 'vi://%s:%s@%s/%s/host/%s'" % (config.get("OVFTOOL_LOG"), datastore,
