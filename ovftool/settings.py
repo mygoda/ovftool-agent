@@ -32,7 +32,6 @@ class Config(object):
     DOWNLOAD_PATH = "/data/transmission-daemon/downloads"
 
 
-
 class DevelopmentConfig(Config):
     """
         devlopment conofig
