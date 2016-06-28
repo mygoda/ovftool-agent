@@ -57,7 +57,7 @@ def vms():
             # just confirm can i do it
             deploy_ova.apply_async(args=[data.get("username"), data.get("password"), data.get("host"),
                                              data.get("vm_name"), data.get("cluster_name"),
-                                         data.get("datastore"), data.get("datacenter"), data.get("tpl_folder"), data.get("task_id ")])
+                                         data.get("datastore"), data.get("datacenter"), data.get("tpl_folder"), data.get("task_id")])
             return jsonify(result)
         else:
             result["status"] = "forbid"
