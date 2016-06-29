@@ -40,6 +40,7 @@ def convert_to_ova(host, username, password, datacenter, vm_name, task_id):
 
     except Exception as e:
         logging.error("convert to ova catch exception:%s" % traceback.format_exc())
+        task_callback(task_id=task_id, status="ovf_fault", result=str(e))
 
 
 @celery.task

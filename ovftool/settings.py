@@ -15,8 +15,6 @@ class Config(object):
 
     PAAS_HOST = "114.112.92.254:8888"  # IP:PORT
 
-    OVF_TOKEN = "OVF_TEST"
-
     CALLBACK_TOKEN = "CALLBACK_TEST"
 
     REDIS_URL = 'redis://localhost:6379/1'
