@@ -19,7 +19,7 @@ class Config(object):
 
     CALLBACK_TOKEN = "CALLBACK_TEST"
 
-    REDIS_URL = 'redis://localhost:6379/1'
+    REDIS_URL = 'redis://:cds-china@localhost:6379/1'
 
     MAIL_SERVER = 'mail.yun-idc.com'
 
@@ -29,7 +29,7 @@ class Config(object):
 
     MAIL_PASSWORD = 'yun-idc.com'
 
-    DOWNLOAD_PATH = "/data/transmission-daemon/downloads "
+    DOWNLOAD_PATH = "/data/transmission-daemon/downloads"
 
 
 
@@ -37,4 +37,4 @@ class DevelopmentConfig(Config):
     """
         devlopment conofig
     """
-    TOKEN = "TEST"
+    TOKEN = "OVF_TEST"
