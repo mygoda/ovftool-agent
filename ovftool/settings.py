@@ -19,13 +19,13 @@ class Config(object):
 
     REDIS_URL = 'redis://localhost:6379/1'
 
-    MAIL_SERVER = 'mail.yun-idc.com'
+    MAIL_SERVER = 'mail.163.com'
 
     MAIL_USERNAME = r"cds\cdsservice"
 
-    ADMINS = ['cdsservice@yun-idc.com']
+    ADMINS = ['cc@163.com']
 
-    MAIL_PASSWORD = 'yun-idc.com'
+    MAIL_PASSWORD = 'cccc'
 
     DOWNLOAD_PATH = "/data/transmission-daemon/downloads"
 
@@ -34,4 +34,4 @@ class DevelopmentConfig(Config):
     """
         devlopment conofig
     """
-    TOKEN = "TEST"
+    pass
