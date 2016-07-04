@@ -40,6 +40,7 @@ def convert_to_ova(host, username, password, datacenter, vm_name, task_id):
 
     except Exception as e:
         logging.error("convert to ova catch exception:%s" % traceback.format_exc())
+        task_callback(task_id=task_id, status="ovf_fault", result=str(e))
 
 
 @celery.task
@@ -61,15 +62,13 @@ def deploy_ova(username, password, host, vm_name, cluster_name, datastore, datac
         success, result = deploy(username=username, host=host, password=password, vm_name=vm_name,
                                  cluster_name=cluster_name, datastore=datastore, datacenter=datacenter, tpl_folder=tpl_folder, task_id=task_id)
 
-        print(username)
-        print(password)
-        print(host)
         if success:
             # 回调
             status = "deploy_success"
         else:
             status = "deploy_fault"
         task_callback(task_id=task_id, status=status, result=result)
+
 
     except Exception as e:
         logging.error("deploy ova catch exception:%s" % traceback.format_exc())

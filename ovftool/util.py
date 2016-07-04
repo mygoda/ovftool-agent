@@ -32,22 +32,19 @@ def deploy(host, username, password, vm_name, cluster_name, datastore, datacente
                                        " --acceptAllEulas  --noSSLVerify -vf='%s' -ds='%s'"
                                        " %s 'vi://%s:%s@%s/%s/host/%s'" % (config.get["OVFTOOL_LOG"], tpl_folder, datastore, ova_path, username, password, host, datacenter, cluster_name), shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
         else:
-            aa = "ovftool --machineOutput --X:logLevel=verbose --X:logFile='%s' --acceptAllEulas  --noSSLVerify  -ds='%s' %s 'vi://%s:%s@%s/%s/host/%s'" % (config.get("OVFTOOL_LOG"), datastore,
-                                                                                                                                                            ova_path, username, password, host, datacenter, cluster_name)
-
-            print(aa)
-            print(config.get("DOWNLOAD_PATH"))
-            print("11%s" % vm_name)
-            print(ova_path)
             process = subprocess.Popen("ovftool --machineOutput --X:logLevel=verbose --X:logFile='%s' --acceptAllEulas  --noSSLVerify  -ds='%s' %s 'vi://%s:%s@%s/%s/host/%s'" % (config.get("OVFTOOL_LOG"), datastore, ova_path, username, password, host, datacenter, cluster_name),
                                        shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
 
         result = process.communicate()
-        print(result)
+	print("deplot result is %s" % result)
+        delete_process = subprocess.Popen("rm -fv %s" % ova_path, shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        delete_result = delete_process.communicate()
+	print("delete tpl result is %s" % delete_result)
+        logger.debug("delete ova file:%s" % ova_path)
         for res in result:
             if "SUCCESS" in res:
                 logger.debug("ova:%s convert success then to chmod" % vm_name)
-                return True, result
+                return True, "deploy ova success"
             elif "ERROR" in res:
                 return False, res
     except Exception as e:
@@ -74,7 +71,7 @@ def convert(host, username, password, datacenter, vm_name, task_id):
                                    " '%s'" % (config.get("OVFTOOL_LOG"), username, password, host, datacenter, vm_name, ova_path), shell=True
                                    ,stdin=PIPE, stdout=PIPE, stderr=PIPE)
         result = process.communicate()
-        print(result)
+        logger.debug("convert vm:%s to ova result is %s" % (vm_name, result))
         for res in result:
             if "SUCCESS" in res:
                 chmod_process = subprocess.Popen("chmod 644 %s" % ova_path, shell=True)
@@ -82,7 +79,7 @@ def convert(host, username, password, datacenter, vm_name, task_id):
                 logger.debug("ova:%s convert success and chmod success" % vm_name)
                 return True, "success"
             elif "ERROR" in res:
-                return False, res
+                return False, result
 
     except Exception as e:
         logger.error("convert ova when catch error:%s" % str(e))
