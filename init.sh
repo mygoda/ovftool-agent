@@ -1,3 +1,4 @@
+apt-get install -y nginx redis.server supervisor
 mkdir /var/log/ovftool
 mkdir /var/tmp/torrents
 

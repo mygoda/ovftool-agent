@@ -69,6 +69,5 @@ def deploy_ova(username, password, host, vm_name, cluster_name, datastore, datac
             status = "deploy_fault"
         task_callback(task_id=task_id, status=status, result=result)
 
-
     except Exception as e:
         logging.error("deploy ova catch exception:%s" % traceback.format_exc())
