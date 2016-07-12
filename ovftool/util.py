@@ -27,13 +27,15 @@ def deploy(host, username, password, vm_name, cluster_name, datastore, datacente
     try:
         logger.info("start deploy ....")
         ova_path = "%s/%s.ova" % (config.get("DOWNLOAD_PATH"), vm_name)
-        if tpl_folder:
+        print("222222222222222222222")
+	if tpl_folder:
+	    print("11111111")
             process = subprocess.Popen("ovftool --machineOutput"
                                        " --acceptAllEulas  -dm=thin --noSSLVerify -vf='%s' -ds='%s'"
                                        " %s 'vi://%s:%s@%s/%s/host/%s'" % (tpl_folder, datastore, ova_path, username, password, host, datacenter, cluster_name), shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
         else:
 	    print("yyyyyyy")
-	    process_str = "ovftool --machineOutput --X:logLevel=verbose --X:logFile='%s' --acceptAllEulas  --noSSLVerify  -ds='%s' %s 'vi://%s:%s@%s/%s/host/%s'" % (config.get("OVFTOOL_LOG"), datastore, ova_path, username, password, host, datacenter, cluster_name) 
+	    process_str = "ovftool --machineOutput -dm=thin --acceptAllEulas  --noSSLVerify  -ds='%s' %s 'vi://%s:%s@%s/%s/host/%s'" % (datastore, ova_path, username, password, host, datacenter, cluster_name) 
 	    print(process_str) 
             process = subprocess.Popen(process_str, shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
 
@@ -77,7 +79,7 @@ def convert(host, username, password, datacenter, vm_name, task_id):
         process = subprocess.Popen("ovftool -o --machineOutput"
                                    "  --noSSLVerify "
                                    " 'vi://%s:%s@%s/%s/vm/%s'"
-                                   " '%s'" % (config.get("OVFTOOL_LOG"), username, password, host, datacenter, vm_name, ova_path), shell=True
+                                   " '%s'" % (username, password, host, datacenter, vm_name, ova_path), shell=True
                                    ,stdin=PIPE, stdout=PIPE, stderr=PIPE)
         result = process.communicate()
         logger.debug("convert vm:%s to ova result is %s" % (vm_name, result))
