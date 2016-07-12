@@ -28,7 +28,7 @@ def deploy(host, username, password, vm_name, cluster_name, datastore, datacente
         logger.info("start deploy ....")
         ova_path = "%s/%s.ova" % (config.get("DOWNLOAD_PATH"), vm_name)
         if tpl_folder:
-            process = subprocess.Popen("ovftool --machineOutput --X:logLevel=verbose --X:logFile='%s'"
+            process = subprocess.Popen("ovftool --machineOutput"
                                        " --acceptAllEulas  --noSSLVerify -vf='%s' -ds='%s'"
                                        " %s 'vi://%s:%s@%s/%s/host/%s'" % (config.get["OVFTOOL_LOG"], tpl_folder, datastore, ova_path, username, password, host, datacenter, cluster_name), shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
         else:
@@ -74,7 +74,7 @@ def convert(host, username, password, datacenter, vm_name, task_id):
     try:
         ova_path = "%s/%s.ova" % (config.get("OVA_PATH"), vm_name)
         logger.info("start convert....")
-        process = subprocess.Popen("ovftool -o --machineOutput --X:logLevel=verbose --X:logFile='%s'"
+        process = subprocess.Popen("ovftool -o --machineOutput"
                                    "  --noSSLVerify "
                                    " 'vi://%s:%s@%s/%s/vm/%s'"
                                    " '%s'" % (config.get("OVFTOOL_LOG"), username, password, host, datacenter, vm_name, ova_path), shell=True
