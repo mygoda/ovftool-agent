@@ -29,7 +29,7 @@ def deploy(host, username, password, vm_name, cluster_name, datastore, datacente
         ova_path = "%s/%s.ova" % (config.get("DOWNLOAD_PATH"), vm_name)
         if tpl_folder:
             process = subprocess.Popen("ovftool --machineOutput"
-                                       " --acceptAllEulas  --noSSLVerify -vf='%s' -ds='%s'"
+                                       " --acceptAllEulas  -dm=thin --noSSLVerify -vf='%s' -ds='%s'"
                                        " %s 'vi://%s:%s@%s/%s/host/%s'" % (config.get["OVFTOOL_LOG"], tpl_folder, datastore, ova_path, username, password, host, datacenter, cluster_name), shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
         else:
 	    print("yyyyyyy")
