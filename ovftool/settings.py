@@ -13,7 +13,7 @@ class Config(object):
 
     TOEKN = "OVF_TEST"
 
-    PAAS_HOST = "114.112.92.254:8888"  # IP:PORT
+    PAAS_HOST = ""  # IP:PORT
 
     CALLBACK_TOKEN = "CALLBACK_TEST"
 
@@ -27,11 +27,11 @@ class Config(object):
 
     MAIL_PASSWORD = 'cccc'
 
-    DOWNLOAD_PATH = "/data/transmission-daemon/downloads"
+    DOWNLOAD_PATH = "your dir"
 
 
 class DevelopmentConfig(Config):
     """
         devlopment conofig
     """
-    pass
+    TOKEN = "OVF_TEST"
