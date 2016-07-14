@@ -8,7 +8,7 @@ import requests
 from subprocess import PIPE
 from ovftool import config
 import logging
-
+import traceback
 
 logger = logging.getLogger(__name__)
 
@@ -27,27 +27,40 @@ def deploy(host, username, password, vm_name, cluster_name, datastore, datacente
     try:
         logger.info("start deploy ....")
         ova_path = "%s/%s.ova" % (config.get("DOWNLOAD_PATH"), vm_name)
-        if tpl_folder:
-            process = subprocess.Popen("ovftool --machineOutput --X:logLevel=verbose --X:logFile='%s'"
-                                       " --acceptAllEulas  --noSSLVerify -vf='%s' -ds='%s'"
-                                       " %s 'vi://%s:%s@%s/%s/host/%s'" % (config.get["OVFTOOL_LOG"], tpl_folder, datastore, ova_path, username, password, host, datacenter, cluster_name), shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        print("222222222222222222222")
+	if tpl_folder:
+	    print("11111111")
+            process = subprocess.Popen("ovftool --machineOutput"
+                                       " --acceptAllEulas  -dm=thin --noSSLVerify -vf='%s' -ds='%s'"
+                                       " %s 'vi://%s:%s@%s/%s/host/%s'" % (tpl_folder, datastore, ova_path, username, password, host, datacenter, cluster_name), shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
         else:
-            process = subprocess.Popen("ovftool --machineOutput --X:logLevel=verbose --X:logFile='%s' --acceptAllEulas  --noSSLVerify  -ds='%s' %s 'vi://%s:%s@%s/%s/host/%s'" % (config.get("OVFTOOL_LOG"), datastore, ova_path, username, password, host, datacenter, cluster_name),
-                                       shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
+	    print("yyyyyyy")
+	    process_str = "ovftool --machineOutput -dm=thin --acceptAllEulas  --noSSLVerify  -ds='%s' %s 'vi://%s:%s@%s/%s/host/%s'" % (datastore, ova_path, username, password, host, datacenter, cluster_name) 
+	    print(process_str) 
+            process = subprocess.Popen(process_str, shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
 
-        result = process.communicate()
-        delete_process = subprocess.Popen("rm -fv %s" % ova_path, shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
-        delete_process.communicate()
+        print("yyyyyyyyyyyyyyyy")
+	result = process.communicate()
+	print(result)
+	if result:
+	    print("deploy result isi vvvvvvvv")
+        else:
+	    print("deploy result is exists")
+	delete_process = subprocess.Popen("rm -fv %s" % ova_path, shell=True, stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        delete_result = delete_process.communicate()
+	#print("delete tpl result is %s" % delete_result)
         logger.debug("delete ova file:%s" % ova_path)
         for res in result:
             if "SUCCESS" in res:
                 logger.debug("ova:%s convert success then to chmod" % vm_name)
                 return True, "deploy ova success"
             elif "ERROR" in res:
+		print("just for deploy is error ova_path is %s" % ova_path)
                 return False, res
     except Exception as e:
         logger.error("deploy ovftool when catch error:%s" % str(e))
-        return False, str(e)
+        logger.error("ssss is %s" % traceback.format_exc())
+	return False, str(e)
 
 
 def convert(host, username, password, datacenter, vm_name, task_id):
@@ -63,10 +76,10 @@ def convert(host, username, password, datacenter, vm_name, task_id):
     try:
         ova_path = "%s/%s.ova" % (config.get("OVA_PATH"), vm_name)
         logger.info("start convert....")
-        process = subprocess.Popen("ovftool -o --machineOutput --X:logLevel=verbose --X:logFile='%s'"
+        process = subprocess.Popen("ovftool -o --machineOutput"
                                    "  --noSSLVerify "
                                    " 'vi://%s:%s@%s/%s/vm/%s'"
-                                   " '%s'" % (config.get("OVFTOOL_LOG"), username, password, host, datacenter, vm_name, ova_path), shell=True
+                                   " '%s'" % (username, password, host, datacenter, vm_name, ova_path), shell=True
                                    ,stdin=PIPE, stdout=PIPE, stderr=PIPE)
         result = process.communicate()
         logger.debug("convert vm:%s to ova result is %s" % (vm_name, result))

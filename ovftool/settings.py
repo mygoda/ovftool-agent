@@ -17,7 +17,7 @@ class Config(object):
 
     CALLBACK_TOKEN = "CALLBACK_TEST"
 
-    REDIS_URL = 'redis://localhost:6379/1'
+    REDIS_URL = 'redis://:cds-china@localhost:6379/1'
 
     MAIL_SERVER = 'mail.163.com'
 
